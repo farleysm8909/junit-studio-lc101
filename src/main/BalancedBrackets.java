@@ -22,14 +22,39 @@ public class BalancedBrackets {
      * @return true if balanced, false otherwise
      */
     public static boolean hasBalancedBrackets(String str) {
+        int right = 0; // ]
+        int left = 0;  // [
+        for (char ch : str.toCharArray()) {
+            if (ch == '[' && left-right == 0) {
+                left++;
+            } else if (ch == ']' && left-right == 1) {
+                right++;
+            } else if (ch == '[') {
+                return false;
+            } else if (ch == ']') {
+                return false;
+            }
+        }
+        return left-right == 0;
+    }
+
+    /*
+    * GitLab Solution:
+    * public static boolean hasBalancedBrackets(String str) {
         int brackets = 0;
         for (char ch : str.toCharArray()) {
-            if (ch == '[') {
-                brackets++;
-            } else if (ch == ']') {
-                brackets--;
+            if (brackets >= 0) {
+                if (ch == '[') {
+                    brackets ++;
+                } else if (ch == ']') {
+                    brackets --;
+                }
+            } else {
+                return false;
             }
         }
         return brackets == 0;
-    }
+     }
+    */
+
 }
